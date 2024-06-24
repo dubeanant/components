@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --index: calc(1vw + 1vh);
+  --transition: cubic-bezier(.1, .2, 0, 1);
+}
+
+.custom-perspective {
+  perspective: calc(var(--index) * 35);
+}
+
+.item {
+  transition: transform 1.25s var(--transition), filter 3s var(--transition);
+  will-change: transform, filter, rotateY, width;
+}
+
+.item:hover {
+  filter: inherit;
+  transform: translate(calc(var(--index) * 10));
+}
+
+.item:hover + * {
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 2.5)) rotateY(35deg);
+  z-index: -1;
+}
+
+.item:hover + * + * {
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 5.6)) rotateY(40deg);
+  z-index: -2;
+}
+
+.item:hover + * + * + * {
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 2.5)) rotateY(50deg);
+  z-index: -3;
+}
+
+.item:hover + * + * + * + * {
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 0.6)) rotateY(15deg);
+  z-index: -4;
+}
+
+.item:has(+ :hover) {
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 5.6)) rotateY(-35deg);
+}
+
+.item:has(+ * + :hover) {
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 5.6)) rotateY(-40deg);
+}
+
+.item:has(+ * + * + :hover) {
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 2.5)) rotateY(-50deg);
+}
+
+.item:has(+ * + * + * + :hover) {
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 0.6)) rotateY(-15deg);
+}
+
+.item:active,
+.item:focus {
+  width: 20vw;
+  filter: inherit;
+  z-index: 100;
+  transform: translateZ(calc(var(--index) * 10));
+  margin: 0.45vw;
+}
